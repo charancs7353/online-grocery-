@@ -1,0 +1,52 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Grocery Mart{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+
+        <a href="/" class="logo">🛒 Grocery Mart</a>
+
+        <form action="#" class="search">
+            <input type="text" placeholder="Search groceries...">
+            <button type="button">Search</button>
+        </form>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/products/">Products</a>
+            <a href="/login/">Login</a>
+            <a href="/register/">Register</a>
+            <a href="/cart/">🛒 Cart</a>
+        </div>
+
+    </nav>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <h3>🛒 Grocery Mart</h3>
+    <p>Fresh groceries delivered to your doorstep.</p>
+    <p>© 2026 Grocery Mart</p>
+</footer>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

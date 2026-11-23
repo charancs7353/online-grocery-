@@ -1,0 +1,78 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grocery Registration</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0f7f0;
+        }
+        .register-box {
+            width: 350px;
+            margin: 60px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #ccc;
+            text-align: center;
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 98%;
+            padding: 12px;
+            background: #269b50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a { color: #269b50; }
+    </style>
+</head>
+<body>
+
+<div class="register-box">
+    <h2>Create Account</h2>
+    <p>Join our Grocery Store</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="username"
+               placeholder="Username" required>
+
+        <input type="email" name="email"
+               placeholder="Email Address" required>
+
+        <input type="password" name="password"
+               placeholder="Password" required>
+
+        <input type="password" name="confirm_password"
+               placeholder="Confirm Password" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account?
+        <a href="{% url 'login' %}">Login Here</a>
+    </p>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</div>
+
+</body>
+</html>

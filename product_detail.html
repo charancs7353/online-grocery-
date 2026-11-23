@@ -1,0 +1,44 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Details</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="product-detail">
+
+    <img src="{% static 'images/' %}{{ product.image }}"
+         alt="{{ product.name }}">
+
+    <h1>{{ product.name }}</h1>
+
+    <p>{{ product.description }}</p>
+
+    <h2>Price: ₹{{ product.price }}</h2>
+
+    <form method="POST"
+          action="{% url 'add_to_cart' product.id %}">
+
+        {% csrf_token %}
+
+        <button type="submit" class="add-cart-btn">
+            Add to Cart
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'products' %}">
+        Back to Products
+    </a>
+
+</div>
+
+</body>
+</html>

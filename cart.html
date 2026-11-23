@@ -1,0 +1,125 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Grocery Cart</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f8f4;
+            padding: 20px;
+        }
+
+        .cart-container {
+            max-width: 850px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 90px;
+            object-fit: cover;
+        }
+
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .total {
+            color: #269b50;
+            text-align: right;
+        }
+
+        .continue-btn {
+            display: inline-block;
+            background: #269b50;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="cart-container">
+
+    <h1>My Shopping Cart 🛒</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    {% if cart_items %}
+
+        {% for item in cart_items %}
+
+        <div class="cart-item">
+
+            <img src="{% static 'images/' %}{{ item.image }}"
+                 alt="{{ item.name }}">
+
+            <div>
+                <h3>{{ item.name }}</h3>
+                <p>Price: ₹{{ item.price }}</p>
+                <p>Quantity: {{ item.quantity }}</p>
+                <p>Subtotal: ₹{{ item.subtotal }}</p>
+
+                <form method="POST"
+                      action="{% url 'remove_from_cart' item.id %}">
+
+                    {% csrf_token %}
+
+                    <button class="remove-btn" type="submit">
+                        Remove
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <h2 class="total">Total: ₹{{ total }}</h2>
+
+    {% else %}
+
+        <h2>Your cart is empty!</h2>
+        <p>Please add some grocery products.</p>
+
+    {% endif %}
+
+    <a href="{% url 'products' %}" class="continue-btn">
+        Continue Shopping
+    </a>
+
+</div>
+
+</body>
+</html>

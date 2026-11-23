@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Grocery Mart Home{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <h1>Welcome to Grocery Mart!</h1>
+
+    <p>Fresh groceries delivered to your doorstep.</p>
+
+    <a href="#" class="shop-btn">Shop Now</a>
+
+</section>
+
+<h2 class="heading">Our Grocery Products</h2>
+
+<div class="product-container">
+
+    {% for product in products %}
+
+    <div class="product-card">
+
+        <img
+            src="{% static 'images/' %}{{ product.image }}"
+            alt="{{ product.name }}"
+            onerror="this.src='https://placehold.co/300x200?text=Grocery'">
+
+        <h3>{{ product.name }}</h3>
+
+        <p>{{ product.category }}</p>
+
+        <h4>₹{{ product.price }}</h4>
+
+        <button class="product-btn">View Product</button>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
